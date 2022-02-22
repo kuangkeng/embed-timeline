@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +11,9 @@
 
 <style>
 body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
-  font-size: 112.5%;
-  line-height: 1.5em;
+  font-family: 'MarcinAntB', sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
   color: #666666;
       }  
 
@@ -29,57 +29,36 @@ body {
     height: 800px;  /*INPUT: set the height of the chart*/
     max-width: 100%;
 }
-
-.head {padding:10px 10px;}
-
-.headline {
-    font-size: 18px;
-    font-weight: normal;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    color: #33333c;
-    line-height: 24px;
-}
-
-.text {
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 18px;
-}
-
-.popbox{
-    line-height: 0.9em;   
-}
-
 .highcharts-data-label span{
-    white-space: normal;
+    font-size: 14px;       
+}
+.popbox > span{
+        font-size: 14px !important;
+        line-height: 1.3em;
 }
 
-@media (max-width: 400px ) { 
-    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
-    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
-    .highcharts-data-label text{
-        font-size: 8px;       
+@media (max-width: 500px ) { 
+    .highcharts-data-label span{
+        font-size: 10px;       
+    }
+    .popbox > span{
+        font-size: 10px !important;
+        line-height: 1.3em;
     }
 }  
 
 </style>
 <body>
-<div id="wrapper"> 
-    <div class="head">
-        <div class="headline">Title</div>
-        <div class="text">Description</div> 
-        <div class="text">Tap the boxes for more information.</div> 
-    </div>   
+<div id="wrapper">   
     <div id="container"></div>
 </div>
 </body>
 
 <script>
-var adjust = -25;
+var adjust = -34;
 var tooltipWidth = 300;
 if($(window).width() < 500){
-    adjust = -42;
+    adjust = -25;
     tooltipWidth = 250;
 }
 
@@ -88,7 +67,10 @@ $(function () {
         chart: {
             zoomType: 'x',
             type: 'timeline',
-            inverted: true
+            inverted: true,
+            style: {
+              fontFamily: 'MarcinAntB, sans-serif',
+            }
         },
         xAxis: {
             type: 'datetime',
@@ -113,7 +95,7 @@ $(function () {
                 if(this.point.description == ""){
                     return false;
                 } else {
-                        return this.point.description;
+                    return this.point.description;
                 }  
             },
             style: {width: tooltipWidth},
@@ -125,32 +107,30 @@ $(function () {
                 formatter: 
                 function () {
                     if($(window).width() < 350){
-                        return '<div style="width: 120px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
                     } else if ($(window).width() < 500) {
-                        return '<div style="width: 140px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
                     } else {
-                        return '<div style="width: 230px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
                     }
                 },
-                // connectorWidth: 1,
-                // // connectorColor: 'blue',
             },
             marker: {
             symbol: 'circle'
             },
             data: [
-                {dataLabels:{x:-150}, x: Date.UTC(2020, 11 ,16), name:"El ministro Claude Nyamugabo otorga 15 concesiones de conservación a KFBS ", label:"16 a 18-dic.-2020", description:"", color:"#7ed321"},
-                {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor y KFBS informan a la provincia Tshopo sobre el nuevo título de conservación en la zona", label:"27 marzo 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba es nombrada viceprimer ministra de Medio Ambiente ", label:"12 abril 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15), name:"Sodefor notifica la nueva concesión a las communities en Isangi, Tshopo", label:"1 mayo 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 9 ,20), name:"Juristas piden la suspensión de otros 22 contratos firmados por Nyamugabo", label:"20 oct. 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2021, 9 ,31), name:"Cumbre del Clima de la ONU (COP26)", label:"31 oct. a 13 nov. 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150,y:34}, x: Date.UTC(2021, 10 ,2), name:"La Iniciativa para los Bosques de África Central firma un acuerdo de diez años con RDC", label:"2 nov. 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2022, 0 ,1), name:"RDC incumple la primera meta del acuerdo con CAFI ", label:"1 enero 2022", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"Fecha límite para la revisión de contratos de tala financiada por la UE", label:"mediados de abril 2022", description:"", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2020, 11 ,16), name:"El ministro Claude Nyamugabo otorga 15 concesiones de conservación a KFBS ", label:"16 a 18-dic.-2020", description:"Los contratos cubren 3,3 millones de hectáreas de bosque y se solapan con un área protegida, tierras indígenas y turberas. Las concesiones pasaro de las empresas madereras Sodefor y Forabola a KFBS, que busca vender créditos de carbono. Todas son subsidiarias del grupo Norsudtimber de Liechtenstein.", color:"#7ed321"},
+                {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor y KFBS informan a la provincia Tshopo sobre el nuevo título de conservación en la zona", label:"27 marzo 2021", description:"La legislación congoleña exige una consulta pública y una sesión de trabajo con  autoridades provinciales,  autoridades nacionales y representantes de la comunidad antes de firmar los contratos. ", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba es nombrada viceprimer ministra de Medio Ambiente ", label:"12 abril 2021", description:"El nombramiento de Bazaïba completa una revisión del gobierno por parte del presidente Felix Tshisekedi. Su predecesor, Claude Nyamugabo, había sido nombrado por el ex presidente de la RDC, Joseph Kabila. ", color:"#7ed321"},
+                {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15), name:"Sodefor notifica la nueva concesión a las comunidades en Isangi, Tshopo", label:"1 mayo 2021", description:"", color:"#7ed321"},
+                {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 9 ,20), name:"Juristas piden la suspensión de otros 22 contratos firmados por Nyamugabo", label:"20 oct. 2021", description:"Alegan que las atribuciones y cesiones son ilegales y piden su suspensión.  Los contratos conciernen 4,4 millones de hectáreas.", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2021, 9 ,31), name:"Cumbre del Clima de la ONU (COP26)", label:"31 oct. a 13 nov. 2021", description:"La RDC se presenta como un 'país solución' por albergar el 60% de la segunda selva tropical del mundo. La Unión Europea y el Reino Unido prometen 1.500 millones de dólares para proteger los bosques de la cuenca del Congo.", color:"#7ed321"},
+                {dataLabels:{x:-150,y:27}, x: Date.UTC(2021, 10 ,2), name:"La Iniciativa para los Bosques de África Central firma un acuerdo de diez años con RDC", label:"2 nov. 2021", description:"El grupo de donantes destina 500 millones de dólares para los primeros cinco años. CAFI está financiado por Alemania, Bélgica, Francia, Países Bajos, Noruega, Reino Unido, Corea del Sur y la UE.", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2022, 0 ,1), name:"RDC incumple la primera meta del acuerdo con CAFI ", label:"1 enero 2022", description:"La RDC se había comprometido a publicar la auditoría financiera de concesiones forestales realizada en 2020 por su Inspección General de Finanzas.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"Fecha límite para la revisión de contratos de tala financiada por la UE", label:"mediados de abril 2022", description:"Las dificultades para obtener permisos oficiales y acceder a la información retrasaron la revisión nueve meses. La revisión será determinante para la suspensión de los títulos ilegales.", color:"#7ed321"},
             ]
         }]
     });
