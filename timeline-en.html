@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/timeline.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #666666;
+      }  
+
+#wrapper {
+    /* border:1px solid #D3D3D3; */
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#container{
+    padding: 0px;
+    height: 800px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:10px 10px;}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #33333c;
+    line-height: 24px;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+.popbox{
+    line-height: 0.9em;   
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 0px;}
+    #text {font-size: 12px;line-height: 14px;padding-bottom: 3px;}
+    .highcharts-data-label text{
+        font-size: 8px;       
+    }
+}  
+
+</style>
+<body>
+<div id="wrapper"> 
+    <div class="head">
+        <div class="headline">Title</div>
+        <div class="text">Description</div> 
+        <div class="text">Tap the boxes for more information.</div> 
+    </div>   
+    <div id="container"></div>
+</div>
+</body>
+
+<script>
+var adjust = -32;
+var tooltipWidth = 300;
+if($(window).width() < 500){
+    adjust = -42;
+    tooltipWidth = 250;
+}
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'x',
+            type: 'timeline',
+            inverted: true
+        },
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+            enabled: false
+            }
+        },
+        legend: {enabled: false},
+        credits: {enabled: false,},
+        title: {text: null},
+        subtitle: {enabled: false},
+        tooltip: {
+            outside: true,
+            className: "popbox",
+            useHTML: true,
+            formatter: function () {
+                if(this.point.description == ""){
+                    return false;
+                } else {
+                        return this.point.description;
+                }  
+            },
+            style: {width: tooltipWidth},
+        },
+        series: [{
+            dataLabels: {
+                useHTML: true,
+                allowOverlap: true,
+                formatter: 
+                function () {
+                    if($(window).width() < 350){
+                        return '<div style="width: 120px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                    } else if ($(window).width() < 500) {
+                        return '<div style="width: 140px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                    } else {
+                        return '<div style="width: 230px; padding-left:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                        + this.point.label + '</span><br><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                    }
+                },
+                // connectorWidth: 1,
+                // // connectorColor: 'blue',
+            },
+            marker: {
+            symbol: 'circle'
+            },
+            data: [
+            {dataLabels:{x:-150}, x: Date.UTC(2020, 11 ,16), name:"DRC Minister Claude Nyamugabo awards 15 conservation contracts to KFBS", label:"16-18 Dec 2020", description:"The contracts see 3,3 million hectares of forest change hands from logging companies Sodefor and Forabola to KFBS, which seeks to sell carbon credits in international markets. The companies are controlled by Portuguese brothers. The concessions overlap with a protected area, indigenous lands and peatlands.", color:"#7ed321"},
+            {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor and KFBS inform Tshopo of the new conservation contract in the province", label:"27 Mar 2021", description:"Instead, DRC law requires a public enquiry and a working session with provincial authorities, national authorities and community representatives before contracts are signed. ", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba is appointed Vice-Prime Minister for the Environment ", label:"12 Apr 2021", description:"The appointment of Bazaïba complettes a government overhaul by President Felix Tshisekedi. Her predecessor Claude Nyamugabo had been appointed by former DRC President Joseph Kabila. ", color:"#7ed321"},
+            {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15), name:"Sodefor informs communities in Isangi, Tshopo, about the new concession", label:"May 2021", description:"", color:"#7ed321"},
+            {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 9 ,20), name:"Jurists call for the suspension of an additional 22 titles awarded by Nyamugabo", label:"20 Oct 2021", description:"They argue the attributions are illegal and  call for their suspension. The contentious concessions cover 4,4 million hectares.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2021, 9 ,31), name:"UN Climate Change Conference (COP26)", label:"31 Oct-13 Nov 2021", description:"The DRC presents itself as a 'solution country'on account of being home to 60% of the world's econd largest rainforest. The European Union and the United Kingdom pledge USD1,5 billion to protect Congo Basin forests.", color:"#7ed321"},
+            {dataLabels:{x:-150,y:25}, x: Date.UTC(2021, 10 ,2), name:"The CAPI launches 10-year deal with the DRC", label:"2 Nov 2021", description:"The donor group earmarks USD500 million for the first five years. CAFI is funded by Belgium, France, Germany, The Netherlands, Norway, the UK, South Korea and the EU.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2022, 0 ,1), name:"The DRC misses the first milestone of the agreement with CAFI", label:"1 Jan 2022", description:"The DRC cails to publish a financial audit of forestry concessions conducted in 2020 by its General Inspection of Finance.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"Deadline for the EU-funded review of the legality of DRC logging titles", label:"Mid April 2022", description:"Difficulty to obtain official permits and access information delayed the review by nine months. The review shall inform the suspension of titles considered illegal.", color:"#7ed321"},
+            ]
+        }]
+    });
+
+
+
+
+
+});
+</script>
