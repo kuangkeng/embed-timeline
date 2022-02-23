@@ -26,7 +26,7 @@ body {
 
 #container{
     padding: 0px;
-    height: 800px;  /*INPUT: set the height of the chart*/
+    height: 700px;  /*INPUT: set the height of the chart*/
     max-width: 100%;
 }
 .highcharts-data-label span{
@@ -55,10 +55,10 @@ body {
 </body>
 
 <script>
-var adjust = -34;
+var adjust = -20;
 var tooltipWidth = 300;
 if($(window).width() < 500){
-    adjust = -25;
+
     tooltipWidth = 250;
 }
 
@@ -106,15 +106,18 @@ $(function () {
                 allowOverlap: true,
                 formatter: 
                 function () {
-                    if($(window).width() < 350){
-                        return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
-                    } else if ($(window).width() < 500) {
-                        return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
-                    } else {
-                        return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                    if(this.point.name == ""){
+                    }else{
+                        if($(window).width() < 350){
+                            return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else if ($(window).width() < 500) {
+                            return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else {
+                            return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        }
                     }
                 },
             },
@@ -122,22 +125,19 @@ $(function () {
             symbol: 'circle'
             },
             data: [
-            {dataLabels:{x:-150}, x: Date.UTC(2020, 11 ,16), name:"DRC Minister Claude Nyamugabo awards 15 conservation contracts to KFBS", label:"16-18 Dec 2020", description:"The contracts see 3,3 million hectares of forest change hands from logging companies Sodefor and Forabola to KFBS, which seeks to sell carbon credits in international markets. The companies are controlled by Portuguese brothers. The concessions overlap with a protected area, indigenous lands and peatlands.", color:"#7ed321"},
-            {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor and KFBS inform Tshopo of the new conservation contract in the province", label:"27 Mar 2021", description:"Instead, DRC law requires a public enquiry and a working session with provincial authorities, national authorities and community representatives before contracts are signed. ", color:"#7ed321"},
-            {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba is appointed Vice-Prime Minister for the Environment ", label:"12 Apr 2021", description:"The appointment of Bazaïba complettes a government overhaul by President Felix Tshisekedi. Her predecessor Claude Nyamugabo had been appointed by former DRC President Joseph Kabila. ", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2021, 0 ,16), name:"DRC Minister Claude Nyamugabo awards 15 conservation contracts to KFBS", label:"16-18 Dec 2020", description:"The contracts see 3,3 million hectares of forest change hands from logging companies Sodefor and Forabola to KFBS, which seeks to sell carbon credits in international markets. All of them are are subsidiaries of Norsudtimber of Liechtenstein. The concessions overlap with a protected area, indigenous lands and peatlands.", color:"#7ed321"},
+            {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor and KFBS inform Tshopo of the new conservation contract in the province", label:"27 Mar 2021", description:"Instead, DRC law requires a public enquiry and engaging communities and provincial authorities before contracts are signed.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba is appointed Vice-Prime Minister for the Environment ", label:"12 Apr 2021", description:"The appointment completes a government overhaul by President Félix Tshisekedi. Her predecessor, Claude Nyamugabo, had been appointed by former DRC President Joseph Kabila.", color:"#7ed321"},
             {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15), name:"Sodefor informs communities in Isangi, Tshopo, about the new concession", label:"May 2021", description:"", color:"#7ed321"},
-            {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 9 ,20), name:"Jurists call for the suspension of an additional 22 titles awarded by Nyamugabo", label:"20 Oct 2021", description:"They argue the attributions are illegal and  call for their suspension. The contentious concessions cover 4,4 million hectares.", color:"#7ed321"},
-            {dataLabels:{x:150}, x: Date.UTC(2021, 9 ,31), name:"UN Climate Change Conference (COP26)", label:"31 Oct-13 Nov 2021", description:"The DRC presents itself as a 'solution country'on account of being home to 60% of the world's econd largest rainforest. The European Union and the United Kingdom pledge USD1,5 billion to protect Congo Basin forests.", color:"#7ed321"},
-            {dataLabels:{x:-150,y:20}, x: Date.UTC(2021, 10 ,2), name:"The CAPI launches 10-year deal with the DRC", label:"2 Nov 2021", description:"The donor group earmarks USD500 million for the first five years. CAFI is funded by Belgium, France, Germany, The Netherlands, Norway, the UK, South Korea and the EU.", color:"#7ed321"},
-            {dataLabels:{x:150}, x: Date.UTC(2022, 0 ,1), name:"The DRC misses the first milestone of the agreement with CAFI", label:"1 Jan 2022", description:"The DRC cails to publish a financial audit of forestry concessions conducted in 2020 by its General Inspection of Finance.", color:"#7ed321"},
-            {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"Deadline for the EU-funded review of the legality of DRC logging titles", label:"Mid April 2022", description:"Difficulty to obtain official permits and access information delayed the review by nine months. The review shall inform the suspension of titles considered illegal.", color:"#7ed321"},
+            {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 8 ,1), name:"Jurists call for the suspension of an additional 22 titles awarded by Nyamugabo", label:"Oct 2021", description:"Jurists argue the titles have been illegally awarded. They cover 4,4 million hectares.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2021, 8 ,25), name:"UN Climate Change Conference (COP26)", label:"31 Oct-13 Nov 2021", description:"The DRC presents itself as a 'solution country,' home to 60% of the world's second largest rainforest. The EU and the UK pledge USD1,5 billion to protect Congo Basin forests.", color:"#7ed321"},
+            {dataLabels:{x:-150,y:10}, x: Date.UTC(2021, 9 ,2), name:"CAFI launches 10-year deal with the DRC", label:"2 Nov 2021", description:"The donor group earmarks USD500 million for the first five years. It is funded by Belgium, France, Germany, The Netherlands, Norway, the UK, South Korea and the EU.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2021, 11 ,1), name:"The DRC misses the first milestone of the agreement with CAFI", label:"1 Jan 2022", description:"The DRC fails to publish a financial audit of forestry concessions conducted in 2020 by its General Inspection of Finance.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2022, 0 ,15), name:"Deadline for the EU-funded review of the legality of DRC logging titles", label:"Mid April 2022", description:"Difficulty to obtain official permits and access information delayed the review by nine months. The review shall inform the suspension of titles considered illegal.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2022, 1 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"CAFI plans to review the legality of conservation concessions as part of its new agreement with the DRC", label:"By 2024", description:"The DRC has seen a surge in 'conservation' concessions for the sale of carbon credits: up to 27 concessions from 3 in 2020 alone.", color:"#7ed321"},
             ]
         }]
     });
-
-
-
-
-
 });
 </script>
