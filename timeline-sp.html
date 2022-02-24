@@ -26,7 +26,7 @@ body {
 
 #container{
     padding: 0px;
-    height: 800px;  /*INPUT: set the height of the chart*/
+    height: 700px;  /*INPUT: set the height of the chart*/
     max-width: 100%;
 }
 .highcharts-data-label span{
@@ -55,10 +55,10 @@ body {
 </body>
 
 <script>
-var adjust = -34;
+var adjust = -20;
 var tooltipWidth = 300;
 if($(window).width() < 500){
-    adjust = -25;
+    
     tooltipWidth = 250;
 }
 
@@ -106,15 +106,18 @@ $(function () {
                 allowOverlap: true,
                 formatter: 
                 function () {
-                    if($(window).width() < 350){
-                        return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
-                    } else if ($(window).width() < 500) {
-                        return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
-                    } else {
-                        return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
-                        + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                    if(this.point.name == ""){
+                    }else{
+                        if($(window).width() < 350){
+                            return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else if ($(window).width() < 500) {
+                            return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else {
+                            return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        }
                     }
                 },
             },
@@ -122,15 +125,17 @@ $(function () {
             symbol: 'circle'
             },
             data: [
-                {dataLabels:{x:-150}, x: Date.UTC(2020, 11 ,16), name:"El ministro Claude Nyamugabo otorga 15 concesiones de conservación a KFBS ", label:"16 a 18-dic.-2020", description:"Los contratos cubren 3,3 millones de hectáreas de bosque y se solapan con un área protegida, tierras indígenas y turberas. Las concesiones pasaro de las empresas madereras Sodefor y Forabola a KFBS, que busca vender créditos de carbono. Todas son subsidiarias del grupo Norsudtimber de Liechtenstein.", color:"#7ed321"},
-                {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27), name:"Sodefor y KFBS informan a la provincia Tshopo sobre el nuevo título de conservación en la zona", label:"27 marzo 2021", description:"La legislación congoleña exige una consulta pública y una sesión de trabajo con  autoridades provinciales,  autoridades nacionales y representantes de la comunidad antes de firmar los contratos. ", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12), name:"Ève Bazaïba es nombrada viceprimer ministra de Medio Ambiente ", label:"12 abril 2021", description:"El nombramiento de Bazaïba completa una revisión del gobierno por parte del presidente Felix Tshisekedi. Su predecesor, Claude Nyamugabo, había sido nombrado por el ex presidente de la RDC, Joseph Kabila. ", color:"#7ed321"},
-                {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15), name:"Sodefor notifica la nueva concesión a las comunidades en Isangi, Tshopo", label:"1 mayo 2021", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 9 ,20), name:"Juristas piden la suspensión de otros 22 contratos firmados por Nyamugabo", label:"20 oct. 2021", description:"Alegan que las atribuciones y cesiones son ilegales y piden su suspensión.  Los contratos conciernen 4,4 millones de hectáreas.", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2021, 9 ,31), name:"Cumbre del Clima de la ONU (COP26)", label:"31 oct. a 13 nov. 2021", description:"La RDC se presenta como un 'país solución' por albergar el 60% de la segunda selva tropical del mundo. La Unión Europea y el Reino Unido prometen 1.500 millones de dólares para proteger los bosques de la cuenca del Congo.", color:"#7ed321"},
-                {dataLabels:{x:-150,y:27}, x: Date.UTC(2021, 10 ,2), name:"La Iniciativa para los Bosques de África Central firma un acuerdo de diez años con RDC", label:"2 nov. 2021", description:"El grupo de donantes destina 500 millones de dólares para los primeros cinco años. CAFI está financiado por Alemania, Bélgica, Francia, Países Bajos, Noruega, Reino Unido, Corea del Sur y la UE.", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2022, 0 ,1), name:"RDC incumple la primera meta del acuerdo con CAFI ", label:"1 enero 2022", description:"La RDC se había comprometido a publicar la auditoría financiera de concesiones forestales realizada en 2020 por su Inspección General de Finanzas.", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15), name:"Fecha límite para la revisión de contratos de tala financiada por la UE", label:"mediados de abril 2022", description:"Las dificultades para obtener permisos oficiales y acceder a la información retrasaron la revisión nueve meses. La revisión será determinante para la suspensión de los títulos ilegales.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2021, 0 ,16),name:"El ministro Claude Nyamugabo otorga 15 concesiones de conservación a KFBS ", label:"16 a 18-dic.-2020", description:"Los contratos cubren 3,3 millones de hectáreas y se solapan con un área protegida, tierras indígenas y turberas. Las concesiones pasaron de las madereras Sodefor y Forabola a KFBS, enfocada a los mercados de carbono. Todas son subsidiarias de Norsudtimber de Liechtenstein.", color:"#7ed321"},
+                {dataLabels:{x:150,y:-20}, x: Date.UTC(2021, 2 ,27),name:"Sodefor y KFBS informan a la provincia Tshopo sobre el nuevo título de conservación en la zona", label:"27 marzo 2021", description:"La ley congoleña exige una consulta pública y el visto bueno de autoridades provinciales, nacionales y comunidades, antes de firmar los contratos.", color:"#7ed321"}, 
+                {dataLabels:{x:-150}, x: Date.UTC(2021, 3 ,12),name:"Ève Bazaïba es nombrada viceprimer ministra de Medio Ambiente ", label:"12 abril 2021", description:"Ello completa la reestructuración del gobierno de Félix Tshisekedi. El predecesor de Bazaïva, Claude Nyamugabo, había sido nombrado por el ex presidente Joseph Kabila.", color:"#7ed321"}, 
+                {dataLabels:{x:150,y:20}, x: Date.UTC(2021, 4 ,15),name:"Sodefor notifica la nueva concesión a las comunidades en Isangi, Tshopo", label:"1 mayo 2021", description:"", color:"#7ed321"}, 
+                {dataLabels:{x:-150, y:adjust}, x: Date.UTC(2021, 8 ,1), name:"Juristas piden suspender otros 22 títulos firmados por Nyamugabo, nueve de ellos de conservación", label:"oct. 2021", description:"Alegan que las atribuciones y cesiones son ilegales y piden su suspensión. Los contratos abarcan 4,4 millones de hectáreas.", color:"#7ed321"}, 
+                {dataLabels:{x:150}, x: Date.UTC(2021, 8 ,25),name:"Cumbre del Clima de la ONU (COP26)", label:"31 oct. a 13 nov. 2021", description:"La RDC se presenta como un 'país solución' por albergar el 60% de la segunda selva tropical del mundo. La UE y el Reino Unido prometen 1.500 millones de dólares para proteger la Cuenca del Congo.", color:"#7ed321"}, 
+                {dataLabels:{x:-150,y:15}, x: Date.UTC(2021, 9 ,2), name:"CAFI firma un acuerdo de diez años con la RDC", label:"2 nov. 2021", description:"Los donantes desembolsarán 500 millones de dólares en los primeros cinco años. CAFI está financiado por Alemania, Bélgica, Francia, Países Bajos, Noruega, Reino Unido, Corea del Sur y la UE.", color:"#7ed321"}, 
+                {dataLabels:{x:150}, x: Date.UTC(2021, 11 ,1),name:"La RDC incumple la primera meta del acuerdo con CAFI", label:"1 enero 2022", description:"La RDC se había comprometido a publicar una auditoría financiera de concesiones forestales realizada en 2020.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2022, 0 ,15),name:"Fecha límite para la revisión de títulos madereros financiada por la UE", label:"mediados de abril 2022", description:"Las dificultades para obtener permisos y acceder a la información retrasaron la revisión nueve meses. La RDC deberá suspender los títulos ilegales.", color:"#7ed321"}, 
+                {dataLabels:{x:-150}, x: Date.UTC(2022, 1 ,31),name:"", label:"", description:"", color:"#7ed321", marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}}, 
+                {dataLabels:{x:-150}, x: Date.UTC(2022, 3 ,15),name:"Revisión de la legalidad de las concesiones de conservación financiada por CAFI", label:"By 2024", description:"La RDC pasó de tener tres concesiones de conservación a 27 en el último trimestre de 2020. Éstas buscan la venta de créditos de carbono.", color:"#7ed321"}, 
             ]
         }]
     });
