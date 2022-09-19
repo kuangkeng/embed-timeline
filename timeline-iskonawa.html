@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/timeline.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: 'MarcinAntB', sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+  color: #666666;
+      }  
+
+#wrapper {
+    /* border:1px solid #D3D3D3; */
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#container{
+    padding: 0px;
+    height: 700px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+.highcharts-data-label span{
+    font-size: 14px;       
+}
+.popbox > span{
+        font-size: 14px !important;
+        line-height: 1.3em;
+}
+
+@media (max-width: 500px ) { 
+    .highcharts-data-label span{
+        font-size: 10px;       
+    }
+    .popbox > span{
+        font-size: 10px !important;
+        line-height: 1.3em;
+    }
+}
+
+</style>
+<body>
+<div id="wrapper">   
+    <div id="container"></div>
+</div>
+</body>
+
+<script>
+var adjust = -20;
+var tooltipWidth = 300;
+if($(window).width() < 500){
+
+    tooltipWidth = 250;
+}
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'x',
+            type: 'timeline',
+            inverted: true,
+            style: {
+              fontFamily: 'MarcinAntB, sans-serif',
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+            enabled: false
+            }
+        },
+        legend: {enabled: false},
+        credits: {enabled: false,},
+        title: {text: null},
+        subtitle: {enabled: false},
+        tooltip: {
+            outside: true,
+            className: "popbox",
+            useHTML: true,
+            formatter: function () {
+                if(this.point.description == ""){
+                    return false;
+                } else {
+                        return this.point.description;
+                }  
+            },
+            style: {width: tooltipWidth},
+        },
+        series: [{
+            dataLabels: {
+                useHTML: true,
+                allowOverlap: true,
+                formatter: 
+                function () {
+                    if(this.point.name == ""){
+                    }else{
+                        if($(window).width() < 350){
+                            return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else if ($(window).width() < 500) {
+                            return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else {
+                            return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        }
+                    }
+                },
+            },
+            marker: {
+            symbol: 'circle'
+            },
+            data: [
+                {dataLabels:{x:-150}, x: Date.UTC(2007,8,10), name:"Titulación de la Comunidad Nativa Chachibai", label:"10 sept 2007", description:"Luego de varios años de gestión, la Comunidad Nativa Chachibai recibe tu titulo de propiedad mediante D.R.S. 132-2007-GRU-P-DRSAU.", color:"#7ed321"},
+                {dataLabels:{x:-150,y:-40}, x: Date.UTC(2010,12,7), name:"La directiva de la comunidad firma un contrato exclusivo para la compra de madera con la empresa N & H SRL", label:"7 mayo 2008", description:"La empresa se compromete a pagar un adelanto de 100,000 soles. De acuerdo al documento, se pagaron 25 mil soles a la firma del contrato.", color:"#7ed321"},
+                {dataLabels:{x:150,y:-50}, x: Date.UTC(2010,12,7), name:"Los directivos de la comunidad firmaron un contrato con la empresa N & H SRL, reconociendo la obligación de pago por 104,266.85 soles", label:"7 mayo 2008", description:"Los 104,266.85 serían los gastos de la empresa para tramitar el título de la comunidad.  Se pagarían con el producto de la extracción forestal en tres años (2008-2010).", color:"#7ed321"},
+                {dataLabels:{x:150,y:30}, x: Date.UTC(2011,4,18), name:"La directiva firma un acuerdo de usufructo y superficie con N & H SRL", label:"18 mayo 2008", description:"El acuerdo otorga derechos a la empresa sobre todo el territorio comunal para extracción forestal durante 15 años. La comunidad debería recibir como pago 20,000 soles anuales.", color:"#7ed321"},
+                {dataLabels:{x:-150, y:40}, x: Date.UTC(2011,4,18), name:"Se firma una addenda al contrato. Si Chachibai incumple el contrato se obliga a pagar 1 millón de soles  como indemnización", label:"18 mayo 2008", description:"El acuerdo es firmado por toda la directiva comunal.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2012, 10 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2014,5,1), name:"Rusber Mori Guimaraes suscribe contrato con la empresa Flor de Ucayali", label:"1 junio 2013", description:"El contrato rebajaba el precio del 'Tornillo' y otras maderas a 0.60 soles. Además, la directiva reconoce una deuda de 16,700 soles, que serán descontados de la venta de la madera.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2015, 3 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2016,4,17), name:"La comunidad recibe una multa por parte de OSINFOR por faltas en la extracción forestal", label:"17 octubre 2017", description:"La multa es por la extracción irregular de 'Tornillo' por la empresa Flor de Ucayali, pero el responsable legal es la Comunidad.", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2018,7,14), name:"Arturo Mori Guimaraes, otra vez presidente de la comunidad, propone a la asamblea la venta total del territorio comunal, la cual es avalada por su directiva", label:"14 agosto 2019", description:"Las más de 20 mil hectáreas de la comunidad se ponen a la venta y se designa a Bilberto Mori Sánchez", color:"#7ed321"},
+                {dataLabels:{x:-150,y:-35}, x: Date.UTC(2020,5,21), name:"Lener Mori Reátegui firma contrato de extracción forestal con la empresa Forestal E&F", label:"21 abril 2021", description:"En casa de Bilberto Mori Sánchez, Lener Mori recibió 15 mil soles de Forestal E & F, según consta en actas.", color:"#7ed321"},
+                {dataLabels:{x:150,y:50}, x: Date.UTC(2021,1,26), name:"Lener Mori compromete a Chachibai al pago de hasta 200,000 soles por la deuda contraída con la N&H SRL por la titulación de la comunidad", label:"26 agosto 2021", description:"Weller Noriega manifiesta que quisiera proseguir con el acuerdo con Chachibai.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2022,2,30), name:"Lener Mori denuncia a los Iskonawa por tráfico ilícito de productos forestales", label:"30 marzo 2022", description:"La denuncia se basa en que la población extrajo madera para la reparación de viviencias y la construcción de la escuela comunal.", color:"#7ed321"},
+            ]
+        }]
+    });
+});
+</script>
