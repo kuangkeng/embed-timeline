@@ -26,7 +26,7 @@ body {
 
 #container{
     padding: 0px;
-    height: 650px;  /*INPUT: set the height of the chart*/
+    height: 600px;  /*INPUT: set the height of the chart*/
     max-width: 100%;
 }
 .highcharts-data-label span{
@@ -55,11 +55,11 @@ body {
 </body>
 
 <script>
-var adjust = -20;
+var adjust = -35;
 var tooltipWidth = 300;
 if($(window).width() < 500){
-
     tooltipWidth = 250;
+    adjust = -25;
 }
 
 $(function () {
@@ -129,13 +129,13 @@ $(function () {
                 {dataLabels:{x:150}, x: Date.UTC(2009,12,7), name:"La directiva de la comunidad firma un contrato maderero exclusivo con la empresa N & H SRL", label:"7 mayo 2008", description:"La empresa se compromete a pagar un adelanto de 100,000 soles. De acuerdo al documento, se pagaron 25,000 soles a la firma del contrato. Adicionalmente, se firma una adenda reconociendo una deuda de 104,266.85 soles que serían los gastos de la empresa para tramitar el título de la comunidad.", color:"#7ed321"},
                 {dataLabels:{x:-150}, x: Date.UTC(2010,4,18), name:"La directiva firma un acuerdo de usufructo y superficie con N & H SRL", label:"18 mayo 2008", description:"El acuerdo otorga derechos a la empresa sobre todo el territorio comunal para extracción forestal durante 15 años. La comunidad debería recibir como pago 20,000 soles anuales. Se firma también una adenda que indica una penalidad de 1 millon de soles si la comunidad incumple el acuerdo.", color:"#7ed321"},
                 {dataLabels:{x:-150}, x: Date.UTC(2011, 10 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2013,5,1), name:"Rusber Mori Guimaraes suscribe contrato con la empresa Flor de Ucayali", label:"1 junio 2013", description:"El contrato rebajaba el precio del 'Tornillo' y otras maderas a 0.60 soles. Además, la directiva reconoce una deuda de 16,700 soles, que serán descontados de la venta de la madera.", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2014, 10 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2016,4,17), name:"La comunidad recibe una multa por parte de OSINFOR por faltas en la extracción forestal", label:"17 octubre 2017", description:"La multa es por la extracción irregular de 'Tornillo' por la empresa Flor de Ucayali, pero el responsable legal es la Comunidad.", color:"#7ed321"},
-                {dataLabels:{x:150}, x: Date.UTC(2018,7,14), name:"Arturo Mori Guimaraes, otra vez presidente de la comunidad, propone a la asamblea la venta total del territorio comunal, la cual es avalada por su directiva", label:"14 agosto 2019", description:"Las más de 20 mil hectáreas de la comunidad se ponen a la venta y se designa a Bilberto Mori Sánchez", color:"#7ed321"},
-                {dataLabels:{x:-150,y:-35}, x: Date.UTC(2020,4,21), name:"Lener Mori Reátegui firma contrato de extracción forestal con la empresa Forestal E&F", label:"21 abril 2021", description:"En casa de Bilberto Mori Sánchez, Lener Mori recibió 15 mil soles de Forestal E & F, según consta en actas.", color:"#7ed321"},
-                {dataLabels:{x:150,y:50}, x: Date.UTC(2021,1,26), name:"Lener Mori compromete a Chachibai al pago de hasta 200,000 soles por la deuda contraída con la N&H SRL por la titulación de la comunidad", label:"26 agosto 2021", description:"Weller Noriega manifiesta que quisiera proseguir con el acuerdo con Chachibai.", color:"#7ed321"},
-                {dataLabels:{x:-150}, x: Date.UTC(2022,2,30), name:"Lener Mori denuncia a los Iskonawa por tráfico ilícito de productos forestales", label:"30 marzo 2022", description:"La denuncia se basa en que la población extrajo madera para la reparación de viviencias y la construcción de la escuela comunal.", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2012,12,1), name:"Rusber Mori Guimaraes suscribe contrato con la empresa Flor de Ucayali", label:"1 junio 2013", description:"El contrato rebajaba el precio del 'Tornillo' y otras maderas a 0.60 soles. Además, la directiva reconoce una deuda de 16,700 soles, que serán descontados de la venta de la madera.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2013,11 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2015,0,17), name:"La comunidad recibe una multa por parte de OSINFOR por faltas en la extracción forestal", label:"17 octubre 2017", description:"La multa es por la extracción irregular de 'Tornillo' por la empresa Flor de Ucayali, pero el responsable legal es la Comunidad.", color:"#7ed321"},
+                {dataLabels:{x:150}, x: Date.UTC(2017,3,14), name:"Arturo Mori Guimaraes, otra vez presidente de la comunidad, propone a la asamblea la venta total del territorio comunal, la cual es avalada por su directiva", label:"14 agosto 2019", description:"Las más de 20 mil hectáreas de la comunidad se ponen a la venta y se designa a Bilberto Mori Sánchez", color:"#7ed321"},
+                {dataLabels:{x:-150,y:adjust}, x: Date.UTC(2019,3,21), name:"Lener Mori Reátegui firma contrato de extracción forestal con la empresa Forestal E&F", label:"21 abril 2021", description:"En casa de Bilberto Mori Sánchez, Lener Mori recibió 15 mil soles de Forestal E & F, según consta en actas.", color:"#7ed321"},
+                {dataLabels:{x:150,y:50}, x: Date.UTC(2020,1,26), name:"Lener Mori compromete a Chachibai al pago de hasta 200,000 soles por la deuda contraída con la N&H SRL por la titulación de la comunidad", label:"26 agosto 2021", description:"Weller Noriega manifiesta que quisiera proseguir con el acuerdo con Chachibai.", color:"#7ed321"},
+                {dataLabels:{x:-150}, x: Date.UTC(2021,4,30), name:"Lener Mori denuncia a los Iskonawa por tráfico ilícito de productos forestales", label:"30 marzo 2022", description:"La denuncia se basa en que la población extrajo madera para la reparación de viviencias y la construcción de la escuela comunal.", color:"#7ed321"},
             ]
         }]
     });
