@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/timeline.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: 'MarcinAntB', sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+  color: #666666;
+      }  
+
+#wrapper {
+    /* border:1px solid #D3D3D3; */
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#container{
+    padding: 0px;
+    height: 600px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+.highcharts-data-label span{
+    font-size: 14px;       
+}
+.popbox > span{
+        font-size: 14px !important;
+        line-height: 1.3em;
+}
+
+@media (max-width: 500px ) { 
+    .highcharts-data-label span{
+        font-size: 10px;       
+    }
+    .popbox > span{
+        font-size: 10px !important;
+        line-height: 1.3em;
+    }
+}
+
+</style>
+<body>
+<div id="wrapper">   
+    <div id="container"></div>
+</div>
+</body>
+
+<script>
+var tooltipWidth = 300;
+if($(window).width() < 500){
+    tooltipWidth = 250;
+}
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'x',
+            type: 'timeline',
+            inverted: true,
+            style: {
+              fontFamily: 'MarcinAntB, sans-serif',
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+            enabled: false
+            }
+        },
+        legend: {enabled: false},
+        credits: {enabled: false,},
+        title: {text: null},
+        subtitle: {enabled: false},
+        tooltip: {
+            outside: true,
+            className: "popbox",
+            useHTML: true,
+            formatter: function () {
+                if(this.point.description == ""){
+                    return false;
+                } else {
+                        return this.point.description;
+                }  
+            },
+            style: {width: tooltipWidth},
+        },
+        series: [{
+            dataLabels: {
+                useHTML: true,
+                allowOverlap: true,
+                formatter: 
+                function () {
+                    if(this.point.name == ""){
+                    }else{
+                        if($(window).width() < 350){
+                            return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else if ($(window).width() < 500) {
+                            return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else {
+                            return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        }
+                    }
+                },
+            },
+            marker: {
+            symbol: 'circle'
+            },
+            data: [
+            {dataLabels:{x:-150}, x: Date.UTC(2007,8,10), name:"Entitlement of the Chachibai Native Community. ", label:"10 Sep 2007", description:"After several years of management, the Native Chachibai community receives a property title through D.R.S. 132-2007-GRU-P-DRSU.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2009,12,7), name:"The Community Directive signs an exclusive timber contract with the company N&H SRL.", label:"7 May 2008", description:"The company undertakes to pay an advance of 100,000 soles. According to the document, 25,000 soles were paid upon signing of the contract. Additionally, an addendum is signed that recognizes the Chachibai community's debt of 104,266.85 soles that would be the company's expenses to process the community title.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2010,4,18), name:"The Directive signs a usufruct and surface agreement with N&H SRL.", label:"18 May 2008", description:"The agreement grants the rights to the company to use the communal territory for forest extraction for 15 years. The community should receive 20,000 soles per year as payment. An addendum that indicates a penalty of 1 million soles is also signed if the community breaches the agreement.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2011, 10 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2012,12,1), name:"Rusber Mori Guimaraes signs a contract with the Flor de Ucayali company.", label:"1 Jun 2013", description:"The contract reduced the price of 'Tornillo' wood and other wood to 0.60 soles. In addition, the community directive recognizes a debt of 16,700 soles, which will be discounted from the sale of wood.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2013,11 ,31),marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2015,0,17), name:"The community receives a fine from OSINFOR for breaches in forest extraction.", label:"17 Oct 2017", description:"The fine is for the irregular extraction of 'Tornillo' wood by the Flor de Ucayali company, but the community is legally responsible.", color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2017,3,14), name:"Arturo Mori Guimaraes proposes to the assembly the total sale of the communal territory, which is endorsed by its directive.", label:"14 Aug 2019", description:"The more than 20,000 hectares of the community are put up for sale and Bilberto Mori Sanchez is appointed as the owner.", color:"#7ed321"},
+            {dataLabels:{x:-150,y:-25}, x: Date.UTC(2019,3,21), name:"Lener Mori Reátegui signs contract with the Forestry E&F company.", label:"21 Apr 2021", description:"At the house of Bilberto Mori Sánchez, Lener Mori receives 15,000 soles from Forestal E&F, according to records.", color:"#7ed321"},
+            {dataLabels:{x:150,y:50}, x: Date.UTC(2020,1,26), name:"Lener Mori commits Chachibai to pay up to 200,000 soles for the debt contracted with the N&H SRL for the community entitlement process. ", label:"26 Aug 2021", description:"Weller Noriega states that he would like to continue with the agreement with Chachibai.", color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2021,4,30), name:"Lener Mori denounces the Iskonawa for illegal trafficking of forest products.", label:"30 Mar 2022", description:"The complaint is based on the fact that the population extracted wood for home repairs and the construction of the communal school.", color:"#7ed321"},            ]
+        }]
+    });
+});
+</script>
