@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/timeline.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: 'MarcinAntB', sans-serif;
+  font-size: 14px;
+  line-height: 1.3em;
+  color: #666666;
+      }  
+
+#wrapper {
+    /* border:1px solid #D3D3D3; */
+    max-width: 600px;  /*INPUT: set the width of the chart*/
+    padding: 0px;
+    margin: 0 auto;
+}
+
+#container{
+    padding: 10px 0px;
+    height: 500px;  /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+.highcharts-data-label span{
+    font-size: 14px;       
+}
+.popbox > span{
+        font-size: 14px !important;
+        line-height: 1.3em;
+}
+
+@media (max-width: 500px ) { 
+    .highcharts-data-label span{
+        font-size: 10px;       
+    }
+    .popbox > span{
+        font-size: 10px !important;
+        line-height: 1.3em;
+    }
+}
+
+</style>
+<body>
+<div id="wrapper">   
+    <div id="container"></div>
+</div>
+</body>
+
+<script>
+var tooltipWidth = 300;
+if($(window).width() < 500){
+    tooltipWidth = 250;
+}
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'x',
+            type: 'timeline',
+            inverted: true,
+            style: {
+              fontFamily: 'MarcinAntB, sans-serif',
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+            enabled: false
+            }
+        },
+        legend: {enabled: false},
+        credits: {enabled: false,},
+        title: {text: null},
+        subtitle: {enabled: false},
+        tooltip: {
+            outside: true,
+            className: "popbox",
+            useHTML: true,
+            formatter: function () {
+                if(this.point.description == ""){
+                    return false;
+                } else {
+                        return this.point.description;
+                }  
+            },
+            style: {width: tooltipWidth},
+        },
+        series: [{
+            dataLabels: {
+                useHTML: true,
+                allowOverlap: true,
+                formatter: 
+                function () {
+                    if(this.point.name == ""){
+                    }else{
+                        if($(window).width() < 350){
+                            return '<div style="width: 120px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else if ($(window).width() < 500) {
+                            return '<div style="width: 140px; padding-left:3px; line-height:1em;"><div style="padding-bottom:3px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        } else {
+                            return '<div style="width: 230px; padding-left:3px; line-height:1.2em;"><div style="padding-bottom:5px;"><span style="color:#7ed321">● </span><span style="font-weight: bold;"> ' 
+                            + this.point.label + '</span></div><span style="white-space: normal;">'+ this.point.name +'</span></div>';
+                        }
+                    }
+                },
+            },
+            marker: {
+            symbol: 'circle'
+            },
+            data: [
+            {dataLabels:{x:-150}, x: Date.UTC(1994,0,0), label:"1994", name:"Une nouvelle loi organise la gestion des forêts camerounaises", description:"Selon cette loi forestière, au moins 30 % du territoire national doit être consacré à l'habitat de la faune et à la production soutenue de produits forestiers. Ces zones sont appelées forêts classées. Dans ce groupe, on trouve les Unités forestières d’aménagement (UFA), également appelées concessions forestières, et leur gestion durable est confiée à des entreprises forestières appelées concessionnaires.",color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(1997,0,0), label:"1997", name:"L'Etat créée l’ Unité Forestière d'Aménagement (UFA 00-003), dépossédant les communautés de leurs terres coutumières", description:"Un décret du Premier ministre a déclaré qu'une portion de forêt couvrant 125 568 hectares de forêt appelée 'Forêt Pilote Lokoundje Nyong' et située dans le Centre, le Littoral et le Sud du Cameroun, a été transformée en forêt de production. Selon la loi forestière, avec ce décret, cette terre devient directement une propriété privée de l'État, ce qui signifie que les communautés ont perdu leurs droits fonciers coutumiers sur cette parcelle de forêts.",color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2000,0,0), label:"2000", name:"L'entreprise Mba Mba Grégoire devient le premier exploitant de l'UFA 00-003", description:"En juillet 2000, le gouvernement camerounais attribue la gestion de l'UFA 00-003 à la société camerounaise Mba Mba Grégoire, à la suite d'un appel d'offres. Mba Mba Grégoire est une élite de la région du Sud, également sénateur du Rassemblement démocratique du peuple camerounais (RDPC), parti au pouvoir. Selon l'Atlas forestier du Cameroun publié en 2007, une filiale du groupe suisso-allemand Danzer.",color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2004,5,0), marker:{symbol: 'url(https://kuangkeng.github.io/embed-timeline/double-line-2.png)'}, name:"", label:"", description:"",color:"#7ed321"},
+            {dataLabels:{x:-150}, x: Date.UTC(2009,0,0), label:"2012", name:"L'UFA 00-003 est divisée en deux, une parcelle transformée en agro-industrie et l'autre reste concession forestière", description:"En 2012, la superficie de l'UFA est réduite pour faire place à une vaste plantation agro-industrielle (Biopalm) de plus de 20 000 hectares de forêt. Les communautés disent non à ce projet, espérant ainsi récupérer leurs terres coutumières.",color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2011,0,0), label:"2013", name:"MMG transfère l'UFA 00-003 à la Compagnie Forestière de kribi (CFK)", description:"MMG laisse la gestion de l'UFA 00-003 à la Compagnie Forestière de Kribi (CFK). Selon les documents, fin 2012, MMG Sarl et Wijma Cameroun (une filiale de la multinationale belge Wijma) ont signé un accord de sous-traitance stipulant que l'UFA sera désormais gérée par CFK.",color:"#7ed321"},
+            {dataLabels:{x:-150,y:-30}, x: Date.UTC(2017,2,0), label:"2019", name:"L'entreprise Propalm Bois devient le troisième concessionnaire de l'UFA 00-003", description:"CFK transfère l'UFA 00-003 à une autre société appelée Propalm Bois. Selon un rapport de Global Forest Watch publié en 2001, le groupe multinational français Thanry était la société mère de Propalm Bois. Un nouveau rapport du WWF présente Propalm Bois comme une filiale du groupe Vicwood. Le groupe Vicwood est une entreprise de transformation du bois à grande échelle basée à Hong Kong qui exploite plus de 3 millions d'hectares de forêt en Afrique centrale. La société Propalm Bois est l’actuel concessionnaire de l'UFA 00-003.",color:"#7ed321"},
+            {dataLabels:{x:-150,y:25}, x: Date.UTC(2018,0,0), label:"2019", name:"Les communautés forestières réclament leurs terres coutumières", description:"Au début de l'année 2019, les communautés Baka et les communautés autochtones Bagyeli découvrent que deux titres fonciers au nom de l'Etat du Cameroun, ont été établis sur les espaces abritant pour certains leurs maisons, tombeaux, lieux sacrés et plantations.",color:"#7ed321"},
+            {dataLabels:{x:150}, x: Date.UTC(2021,0,0), label:"2020", name:"Les communautés forestières portent plainte à l'Etat", description:"Depuis 2020, quatre procédures ont été engagées devant les tribunaux d'Ebolowa et de Kribi dans le Sud et à Yaoundé, la capitale du pays. Les communautés demandent, entre autres, l'annulation de ces titres fonciers qu’ils jugent illégaux et la restitution de leurs terres coutumières.",color:"#7ed321"},
+
+
+            ]
+        }]
+    });
+});
+</script>
